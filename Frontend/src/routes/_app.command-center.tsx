@@ -120,10 +120,10 @@ function CommandCenter() {
       <AnomalyNotice className="mb-6" />
 
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-        <StatCard label="Projects monitored" value={k.total} icon={Boxes} trend={TRENDS.total!} color="var(--primary)" note="Across 10 states" />
-        <StatCard label="High & critical risk" value={k.high} icon={Flame} trend={TRENDS.high!} color="var(--risk-high)" note="Score ≥ 70, awaiting review" />
-        <StatCard label="Pending verification" value={k.pending} icon={ClipboardCheck} trend={TRENDS.pending!} color="var(--risk-medium)" note="Unreviewed + under review" />
-        <StatCard label="Avg. data quality" value={k.dq} suffix="%" icon={Database} trend={TRENDS.dq!} color="var(--risk-low)" note="Completeness of source records" />
+        <StatCard label="Projects monitored" value={k.total} icon={Boxes} trend={TRENDS["total"]!} color="var(--primary)" note="Across 10 states" />
+        <StatCard label="High & critical risk" value={k.high} icon={Flame} trend={TRENDS["high"]!} color="var(--risk-high)" note="Score ≥ 70, awaiting review" />
+        <StatCard label="Pending verification" value={k.pending} icon={ClipboardCheck} trend={TRENDS["pending"]!} color="var(--risk-medium)" note="Unreviewed + under review" />
+        <StatCard label="Avg. data quality" value={k.dq} suffix="%" icon={Database} trend={TRENDS["dq"]!} color="var(--risk-low)" note="Completeness of source records" />
       </div>
 
       <div className="mt-6 grid gap-6 xl:grid-cols-3">

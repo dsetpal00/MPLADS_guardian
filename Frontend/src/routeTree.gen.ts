@@ -11,7 +11,15 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppRouteImport } from './routes/_app'
+import { Route as AppAdminRouteImport } from './routes/_app.admin'
+import { Route as AppAgenciesRouteImport } from './routes/_app.agencies'
+import { Route as AppAnalyticsRouteImport } from './routes/_app.analytics'
+import { Route as AppCasesRouteImport } from './routes/_app.cases'
 import { Route as AppCommandCenterRouteImport } from './routes/_app.command-center'
+import { Route as AppMapRouteImport } from './routes/_app.map'
+import { Route as AppProjectsRouteImport } from './routes/_app.projects'
+import { Route as AppAgenciesAgencyNameRouteImport } from './routes/_app.agencies.$agencyName'
+import { Route as AppProjectsProjectIdRouteImport } from './routes/_app.projects.$projectId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -22,32 +30,128 @@ const AppRoute = AppRouteImport.update({
   id: '/_app',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AppAdminRoute = AppAdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppAgenciesRoute = AppAgenciesRouteImport.update({
+  id: '/agencies',
+  path: '/agencies',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppAnalyticsRoute = AppAnalyticsRouteImport.update({
+  id: '/analytics',
+  path: '/analytics',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppCasesRoute = AppCasesRouteImport.update({
+  id: '/cases',
+  path: '/cases',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppCommandCenterRoute = AppCommandCenterRouteImport.update({
   id: '/command-center',
   path: '/command-center',
   getParentRoute: () => AppRoute,
 } as any)
+const AppMapRoute = AppMapRouteImport.update({
+  id: '/map',
+  path: '/map',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppProjectsRoute = AppProjectsRouteImport.update({
+  id: '/projects',
+  path: '/projects',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppAgenciesAgencyNameRoute = AppAgenciesAgencyNameRouteImport.update({
+  id: '/$agencyName',
+  path: '/$agencyName',
+  getParentRoute: () => AppAgenciesRoute,
+} as any)
+const AppProjectsProjectIdRoute = AppProjectsProjectIdRouteImport.update({
+  id: '/$projectId',
+  path: '/$projectId',
+  getParentRoute: () => AppProjectsRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AppAdminRoute
+  '/agencies': typeof AppAgenciesRouteWithChildren
+  '/analytics': typeof AppAnalyticsRoute
+  '/cases': typeof AppCasesRoute
   '/command-center': typeof AppCommandCenterRoute
+  '/map': typeof AppMapRoute
+  '/projects': typeof AppProjectsRouteWithChildren
+  '/agencies/$agencyName': typeof AppAgenciesAgencyNameRoute
+  '/projects/$projectId': typeof AppProjectsProjectIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/admin': typeof AppAdminRoute
+  '/agencies': typeof AppAgenciesRouteWithChildren
+  '/analytics': typeof AppAnalyticsRoute
+  '/cases': typeof AppCasesRoute
   '/command-center': typeof AppCommandCenterRoute
+  '/map': typeof AppMapRoute
+  '/projects': typeof AppProjectsRouteWithChildren
+  '/agencies/$agencyName': typeof AppAgenciesAgencyNameRoute
+  '/projects/$projectId': typeof AppProjectsProjectIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_app': typeof AppRouteWithChildren
+  '/_app/admin': typeof AppAdminRoute
+  '/_app/agencies': typeof AppAgenciesRouteWithChildren
+  '/_app/analytics': typeof AppAnalyticsRoute
+  '/_app/cases': typeof AppCasesRoute
   '/_app/command-center': typeof AppCommandCenterRoute
+  '/_app/map': typeof AppMapRoute
+  '/_app/projects': typeof AppProjectsRouteWithChildren
+  '/_app/agencies/$agencyName': typeof AppAgenciesAgencyNameRoute
+  '/_app/projects/$projectId': typeof AppProjectsProjectIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/command-center'
+  fullPaths:
+    | '/'
+    | '/admin'
+    | '/agencies'
+    | '/analytics'
+    | '/cases'
+    | '/command-center'
+    | '/map'
+    | '/projects'
+    | '/agencies/$agencyName'
+    | '/projects/$projectId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/command-center'
-  id: '__root__' | '/' | '/_app' | '/_app/command-center'
+  to:
+    | '/'
+    | '/admin'
+    | '/agencies'
+    | '/analytics'
+    | '/cases'
+    | '/command-center'
+    | '/map'
+    | '/projects'
+    | '/agencies/$agencyName'
+    | '/projects/$projectId'
+  id:
+    | '__root__'
+    | '/'
+    | '/_app'
+    | '/_app/admin'
+    | '/_app/agencies'
+    | '/_app/analytics'
+    | '/_app/cases'
+    | '/_app/command-center'
+    | '/_app/map'
+    | '/_app/projects'
+    | '/_app/agencies/$agencyName'
+    | '/_app/projects/$projectId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -71,6 +175,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_app/admin': {
+      id: '/_app/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AppAdminRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/agencies': {
+      id: '/_app/agencies'
+      path: '/agencies'
+      fullPath: '/agencies'
+      preLoaderRoute: typeof AppAgenciesRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/analytics': {
+      id: '/_app/analytics'
+      path: '/analytics'
+      fullPath: '/analytics'
+      preLoaderRoute: typeof AppAnalyticsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/cases': {
+      id: '/_app/cases'
+      path: '/cases'
+      fullPath: '/cases'
+      preLoaderRoute: typeof AppCasesRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/_app/command-center': {
       id: '/_app/command-center'
       path: '/command-center'
@@ -78,15 +210,79 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppCommandCenterRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/map': {
+      id: '/_app/map'
+      path: '/map'
+      fullPath: '/map'
+      preLoaderRoute: typeof AppMapRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/projects': {
+      id: '/_app/projects'
+      path: '/projects'
+      fullPath: '/projects'
+      preLoaderRoute: typeof AppProjectsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/agencies/$agencyName': {
+      id: '/_app/agencies/$agencyName'
+      path: '/$agencyName'
+      fullPath: '/agencies/$agencyName'
+      preLoaderRoute: typeof AppAgenciesAgencyNameRouteImport
+      parentRoute: typeof AppAgenciesRoute
+    }
+    '/_app/projects/$projectId': {
+      id: '/_app/projects/$projectId'
+      path: '/$projectId'
+      fullPath: '/projects/$projectId'
+      preLoaderRoute: typeof AppProjectsProjectIdRouteImport
+      parentRoute: typeof AppProjectsRoute
+    }
   }
 }
 
+interface AppAgenciesRouteChildren {
+  AppAgenciesAgencyNameRoute: typeof AppAgenciesAgencyNameRoute
+}
+
+const AppAgenciesRouteChildren: AppAgenciesRouteChildren = {
+  AppAgenciesAgencyNameRoute: AppAgenciesAgencyNameRoute,
+}
+
+const AppAgenciesRouteWithChildren = AppAgenciesRoute._addFileChildren(
+  AppAgenciesRouteChildren,
+)
+
+interface AppProjectsRouteChildren {
+  AppProjectsProjectIdRoute: typeof AppProjectsProjectIdRoute
+}
+
+const AppProjectsRouteChildren: AppProjectsRouteChildren = {
+  AppProjectsProjectIdRoute: AppProjectsProjectIdRoute,
+}
+
+const AppProjectsRouteWithChildren = AppProjectsRoute._addFileChildren(
+  AppProjectsRouteChildren,
+)
+
 interface AppRouteChildren {
+  AppAdminRoute: typeof AppAdminRoute
+  AppAgenciesRoute: typeof AppAgenciesRouteWithChildren
+  AppAnalyticsRoute: typeof AppAnalyticsRoute
+  AppCasesRoute: typeof AppCasesRoute
   AppCommandCenterRoute: typeof AppCommandCenterRoute
+  AppMapRoute: typeof AppMapRoute
+  AppProjectsRoute: typeof AppProjectsRouteWithChildren
 }
 
 const AppRouteChildren: AppRouteChildren = {
+  AppAdminRoute: AppAdminRoute,
+  AppAgenciesRoute: AppAgenciesRouteWithChildren,
+  AppAnalyticsRoute: AppAnalyticsRoute,
+  AppCasesRoute: AppCasesRoute,
   AppCommandCenterRoute: AppCommandCenterRoute,
+  AppMapRoute: AppMapRoute,
+  AppProjectsRoute: AppProjectsRouteWithChildren,
 }
 
 const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
